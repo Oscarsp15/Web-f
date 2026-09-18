@@ -1,0 +1,204 @@
+/* ==========================================================================
+   layout.css — app shell, sidebar, topbar, content grids and breakpoints
+   ========================================================================== */
+
+.app {
+  display: grid;
+  grid-template-columns: 266px minmax(0, 1fr);
+  min-height: 100%;
+  background: var(--shell);
+}
+
+/* --- sidebar -------------------------------------------------------------- */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__foot {
+  margin-top: auto;
+  padding-top: var(--sp-3);
+}
+
+/* --- main column ---------------------------------------------------------- */
+
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5);
+  background: rgba(16, 18, 24, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.content {
+  padding-inline: var(--sp-5);
+  padding-block: var(--sp-5) var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* --- section grids -------------------------------------------------------- */
+
+.overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 336px;
+  gap: var(--sp-4);
+  align-items: stretch;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-3);
+}
+
+.section-head__filters {
+  margin-left: auto;
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-3);
+}
+
+.staking__body {
+  display: grid;
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr) 392px;
+  gap: var(--sp-5);
+  padding: var(--sp-5) 6px 6px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-3);
+  padding: var(--sp-4) 6px 6px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: 6px;
+}
+
+/* --- mobile drawer scrim -------------------------------------------------- */
+
+.scrim {
+  display: none;
+}
+
+/* --- breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1240px) {
+  .overview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .staking__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1040px) {
+  .app {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sidebar {
+    position: fixed;
+    z-index: 60;
+    left: 0;
+    top: 0;
+    width: 282px;
+    transform: translateX(-102%);
+    transition: transform 0.26s ease;
+  }
+  .app.is-nav-open .sidebar {
+    transform: none;
+  }
+  .app.is-nav-open .scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(6, 7, 10, 0.6);
+  }
+  .asset-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .content {
+    padding-inline: var(--sp-4);
+    padding-block: var(--sp-4) var(--sp-6);
+  }
+  .topbar {
+    padding-inline: var(--sp-4);
+    gap: var(--sp-2);
+  }
+  .asset-grid,
+  .stat-grid,
+  .tabs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .section-head__filters {
+    margin-left: 0;
+  }
+  .staking__body {
+    padding-inline: 0;
+  }
+  .stat-grid {
+    padding-inline: 0;
+  }
+}

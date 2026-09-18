@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Stakent Staking Dashboard</title>
+    <meta
+      name="description"
+      content="Stakent — a liquid staking dashboard: top staking assets, reward rates and active positions."
+    />
+    <meta name="theme-color" content="#0c0e13" />
+    <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="./assets/css/tokens.css" />
+    <link rel="stylesheet" href="./assets/css/layout.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+  </head>
+
+  <body>
+    <div class="app">
+      <div class="scrim" aria-hidden="true"></div>
+
+      <!-- ============================ sidebar ============================ -->
+      <aside class="sidebar" aria-label="Sidebar">
+        <div class="brand">
+          <span class="brand__mark" data-icon="logo" data-icon-size="20"></span>
+          <div>
+            <p class="brand__name">Stakent<sup>®</sup></p>
+            <p class="brand__sub">Top Staking Assets</p>
+          </div>
+          <button type="button" class="brand__switch" aria-label="Switch workspace">
+            <span data-icon="chevronUpDown" data-icon-size="16"></span>
+          </button>
+        </div>
+
+        <div class="segmented" role="group" aria-label="Portfolio type">
+          <button type="button" aria-pressed="true">Staking</button>
+          <button type="button" aria-pressed="false">Stablecoin</button>
+        </div>
+
+        <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main"></nav>
+
+        <div class="sidebar__foot">
+          <button type="button" class="promo-super">
+            <span data-icon="bolt" data-icon-size="18"></span>
+            <span>
+              <b>Activate Super</b>
+              <span>Unlock all features on Stakent</span>
+            </span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- ============================= main ============================== -->
+      <div class="main">
+        <header class="topbar">
+          <button type="button" class="menu-btn" id="menu-btn" aria-label="Open navigation">
+            <span data-icon="menu" data-icon-size="18"></span>
+          </button>
+
+          <div class="user">
+            <span class="user__avatar" aria-hidden="true">RC</span>
+            <div>
+              <p class="user__handle">@ryan997 <span class="user__pro">PRO</span></p>
+              <p class="user__name">Ryan Crawford</p>
+            </div>
+            <button type="button" class="icon-btn icon-btn--bare" aria-label="Account menu">
+              <span data-icon="chevronDown" data-icon-size="16"></span>
+            </button>
+          </div>
+
+          <button type="button" class="btn btn--primary">
+            Deposit <span data-icon="lock" data-icon-size="15"></span>
+          </button>
+
+          <div class="topbar__right">
+            <button type="button" class="icon-btn" aria-label="Notifications, 2 unread">
+              <span data-icon="bell" data-icon-size="17"></span>
+              <span class="badge num" aria-hidden="true">2</span>
+            </button>
+
+            <div class="search">
+              <label class="visually-hidden" for="q">Search assets</label>
+              <input id="q" type="search" placeholder="Search." autocomplete="off" />
+              <span data-icon="search" data-icon-size="16"></span>
+            </div>
+
+            <button type="button" class="pill-btn">
+              Settings <span data-icon="settings" data-icon-size="16"></span>
+            </button>
+          </div>
+        </header>
+
+        <main class="content">
+          <!-- ------------------------- overview ------------------------- -->
+          <section class="overview" aria-labelledby="overview-title">
+            <div>
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">
+                    Recommended coins for 24 hours
+                    <span data-icon="clock" data-icon-size="14"></span>
+                    <span class="chip chip--solid">3 Assets</span>
+                  </p>
+                  <h1 class="title-xl" id="overview-title">Top Staking Assets</h1>
+                </div>
+
+                <div class="section-head__filters" id="asset-filters">
+                  <button type="button" class="chip chip--button">
+                    <span data-icon="chevronDown" data-icon-size="13"></span> 24H
+                  </button>
+                  <button type="button" class="chip chip--button">
+                    <span data-icon="chevronDown" data-icon-size="13"></span> Proof of Stake
+                  </button>
+                  <button type="button" class="chip chip--button">
+                    <span data-icon="chevronDown" data-icon-size="13"></span> Desc
+                  </button>
+                </div>
+              </div>
+
+              <div class="asset-grid" id="asset-grid"></div>
+            </div>
+
+            <aside class="promo" aria-labelledby="promo-title">
+              <div class="promo__top">
+                <span class="brand__mark" data-icon="logo" data-icon-size="18"></span>
+                <p class="brand__name">Stakent<sup>®</sup></p>
+                <span class="tag">New</span>
+              </div>
+              <div>
+                <h2 id="promo-title">Liquid Staking Portfolio</h2>
+                <p>
+                  An all-in-one portfolio that helps you make smarter investments into Ethereum
+                  Liquid Staking
+                </p>
+              </div>
+              <div class="promo__actions">
+                <button type="button" class="btn btn--primary">
+                  Connect with Wallet <span data-icon="wallet" data-icon-size="16"></span>
+                </button>
+                <button type="button" class="btn btn--glass">
+                  Enter a Wallet Address <span data-icon="lock" data-icon-size="15"></span>
+                </button>
+              </div>
+            </aside>
+          </section>
+
+          <!-- ---------------------- active stakings --------------------- -->
+          <section class="panel" aria-labelledby="stakings-title">
+            <header class="panel__head">
+              <h3 id="stakings-title">Your active stakings</h3>
+              <div class="panel__tools">
+                <button type="button" class="icon-btn--bare" aria-label="Performance chart">
+                  <span data-icon="chart" data-icon-size="17"></span>
+                </button>
+                <button type="button" class="icon-btn--bare" aria-label="Add a staking">
+                  <span data-icon="plus" data-icon-size="17"></span>
+                </button>
+                <button type="button" class="icon-btn--bare" aria-label="Refresh">
+                  <span data-icon="refresh" data-icon-size="17"></span>
+                </button>
+                <button type="button" class="icon-btn--bare" aria-label="Filter">
+                  <span data-icon="filter" data-icon-size="17"></span>
+                </button>
+              </div>
+            </header>
+
+            <div class="staking__body">
+              <div id="stake-summary"></div>
+
+              <div class="period">
+                <div class="period__head">
+                  <div>
+                    <h4>Investment Period</h4>
+                    <p class="period__sub">Contribution Period (Month)</p>
+                  </div>
+                  <span class="chip chip--sm" id="period-plan"></span>
+                </div>
+
+                <div class="slider" id="period-slider">
+                  <span class="slider__bubble"></span>
+                  <div class="slider__ruler" aria-hidden="true"></div>
+                  <input
+                    id="period-months"
+                    type="range"
+                    step="1"
+                    aria-label="Contribution period in months"
+                  />
+                  <span class="slider__knob"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tabs" id="stat-tabs" role="tablist" aria-label="Staking metrics"></div>
+
+            <div class="stat-grid" id="stat-grid" role="tabpanel" aria-labelledby="tab-momentum"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>

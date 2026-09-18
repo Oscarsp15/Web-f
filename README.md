@@ -1,76 +1,89 @@
-# Stakent — Staking Dashboard
+# Design Rebuilds
 
-Recreación en HTML/CSS/JavaScript de un dashboard de staking cripto, construida a
-partir de un mockup de referencia. Sin frameworks, sin bundler y sin dependencias:
-sólo ES modules nativos y CSS con custom properties.
+Product designs reconstructed in plain HTML, CSS and JavaScript — no framework, no
+bundler, no dependencies — each one published alongside **the skill that documents
+how it was made**.
 
-**Demo:** https://oscarsp15.github.io/Web-f/
+**Live:** https://oscarsp15.github.io/Web-f/
 
-## Qué incluye
+## What's here
 
-- Sidebar con navegación, acordeón de *Active Staking* y drawer en móvil.
-- Topbar con buscador, notificaciones y acciones de cuenta.
-- Tres tarjetas de assets con sparklines generadas por código (spline
-  Catmull-Rom → bezier, área con degradado y píldora de importe).
-- Tarjeta promocional de *Liquid Staking Portfolio*.
-- Panel "Your active stakings" con slider de periodo de inversión accesible
-  (teclado incluido) y pestañas Momentum / General / Risk / Reward que reescriben
-  las cuatro stat cards.
-- Responsive de 1440px a 390px, con `prefers-reduced-motion` respetado.
+| Design | Screens | Theme | Skill |
+|---|---|---|---|
+| **Stakent** — crypto staking dashboard | Dashboard | Dark | `.claude/skills/stakent-dashboard/` |
+| **Sequence** — business banking | Dashboard, Transfer | Light | `.claude/skills/sequence-fintech/` |
 
-## Estructura
+The gallery at the root lists both, links to each screen, and renders the skill
+documents in place — it fetches the same `.md` files Claude Code loads, so there is
+no second copy to drift.
+
+## Structure
 
 ```
-index.html                      # marcado del shell; se ve aunque el JS falle
-assets/css/tokens.css           # tokens de color/tipo/espaciado + reset
-assets/css/layout.css           # shell, sidebar, topbar, grids y breakpoints
-assets/css/components.css       # botones, chips, cards, panel, slider, stats
-assets/js/data.js               # única fuente de datos de la UI
-assets/js/icons.js              # registro de iconos SVG inline
-assets/js/sparkline.js          # generación de las gráficas
-assets/js/components/*.js       # un módulo por región de la interfaz
-assets/js/app.js                # bootstrap
+index.html                      # the gallery
+assets/gallery/                 # gallery styles, catalogue, markdown renderer
+assets/previews/                # real screenshots of each design
+designs/stakent/                # dark staking dashboard
+designs/sequence/               # light fintech dashboard + transfer flow
+.claude/skills/<name>/SKILL.md  # the recipe, with references/ alongside
 ```
 
-Los datos son de demostración: no hay backend ni feed de precios.
+Every design follows the same layout: `assets/css/{tokens,layout,components}.css`
+and `assets/js/` with one module per region, a single `data.js` holding every
+figure, and an `icons.js` registry. Only `tokens.css` carries raw colors.
 
-## Desarrollo
+## The method
 
-Los ES modules necesitan servirse por HTTP (no `file://`):
+Both skills exist because copying a design by eye does not work. The short version:
+
+- **Measure the reference.** Serve the image over HTTP, read its pixels from a
+  canvas, average blocks for surfaces and take the extreme pixel for text. On
+  Stakent this showed the cards had no gradient at all and the neutrals were
+  violet-cast — neither of which I had guessed.
+- **Rank typefaces by glyph, not by vibe.** Segment individual glyphs out of the
+  reference with connected-component analysis and score candidates by pixel
+  overlap. General Sans won at .752 mean IoU; the Space Grotesk I had originally
+  chosen by eye came last at .589.
+- **If a brand guide is in the set, it outranks your measurements** for brand
+  colors — and your measurements still decide the neutrals, which guides never
+  document.
+
+The full write-ups, including the mistakes that cost a round, are in the skills.
+
+## Fonts, honestly
+
+- **Stakent** uses **General Sans** loaded from Fontshare's CDN. It is not
+  self-hosted: the ITF license text could not be verified from the development
+  environment, and vendoring a font binary whose terms you have not read is not a
+  call to make on someone else's repository.
+- **Sequence**'s brand guide specifies **Helvetica**, which has no free web
+  license. The stack is `"Helvetica Neue", Helvetica, Arimo, Arial, "Liberation
+  Sans"` — Apple devices get the real face, everyone else gets Arimo, metrically
+  compatible with Arial and so with Helvetica, which keeps the layout identical
+  across platforms. Saying "we used Helvetica" would be false on most machines.
+- The **gallery** deliberately loads no webfont at all. It is monochrome and uses
+  the system stack so the thumbnails carry the color and the index loads with zero
+  external requests.
+
+## Development
+
+ES modules need to be served over HTTP, not opened as `file://`:
 
 ```bash
 python3 -m http.server 8000
 # http://localhost:8000
 ```
 
-## Despliegue
+## Deployment
 
-`.github/workflows/deploy-pages.yml` publica la raíz del repo en GitHub Pages en
-cada push a `main`. Requiere *Settings → Pages → Source: GitHub Actions*. Si la
-fuente está configurada como *Deploy from a branch* (`main`, carpeta `/`), el sitio
-se sirve igual: `index.html` está en la raíz y `.nojekyll` evita el paso por Jekyll.
+`.github/workflows/deploy-pages.yml` publishes the repository root to GitHub Pages
+on every push to `main`. Pages source must be set to **GitHub Actions** in
+Settings → Pages. `.nojekyll` is required — without it Jekyll strips the
+`.claude/` directory and the gallery cannot load the skill documents.
 
-## Tipografía y color
+## Credits
 
-Ambos se eligieron midiendo el mockup de referencia, no a ojo:
-
-- **Color**: los tokens de `assets/css/tokens.css` salen de muestrear los píxeles
-  de la imagen (bloques de 9x9 promediados en zonas planas; para el texto, el píxel
-  más luminoso de cada trazo). De ahí el negro con matiz violeta — `#060610` en el
-  sidebar, `#090913` en el área principal, `#0b0b15` en tarjetas — y el blanco puro
-  del texto principal.
-- **Tipografía**: **General Sans** (Indian Type Foundry, vía el CDN de Fontshare).
-  Se eligió comparando siete candidatas libres contra glifos recortados del mockup
-  y midiendo el solape de píxeles (IoU) glifo a glifo. General Sans ganó de media
-  (.752), por delante de Satoshi (.711), DM Sans (.671) y Switzer (.656).
-  La fuente **no se auto-aloja**: no pude verificar desde el entorno de desarrollo
-  si la ITF Free Font License permite redistribuir el binario, así que se carga
-  desde el canal oficial del fundidor. Si se confirma que la licencia lo permite,
-  auto-alojar el `.woff2` quitaría esa dependencia de terceros.
-
-## Créditos
-
-El diseño visual de partida es un shot publicado en Dribbble
-(`cdn.dribbble.com/userupload/13799952`); los derechos del diseño son de su autor.
-Este repositorio es una implementación propia con fines de práctica de front-end:
-no contiene assets, código ni marca del original.
+Both designs are Dribbble shots by their original authors (the Sequence brand guide
+is credited in the shot to Dipa.inhouse). The code here is an original
+implementation written for front-end practice: no assets, code or fonts from the
+originals are included, and the coin marks, flags and icons are all drawn.

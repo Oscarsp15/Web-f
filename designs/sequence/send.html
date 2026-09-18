@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sequence Transfer</title>
+    <meta
+      name="description"
+      content="Sequence — send money abroad: amount, fees and exchange rate before you confirm."
+    />
+    <meta name="theme-color" content="#f5f7f9" />
+    <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="./assets/css/tokens.css" />
+    <link rel="stylesheet" href="./assets/css/layout.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+  </head>
+
+  <body>
+    <div class="checkout">
+      <header class="checkout__bar">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="24" height="24" fill="currentColor">
+              <path d="M14 2a12 12 0 0 0 0 24V17.4a3.4 3.4 0 0 1 0-6.8V2Z" />
+              <path d="M14 2a12 12 0 0 1 0 24v-8.6a3.4 3.4 0 0 0 0-6.8V2Z" opacity=".55" />
+            </svg>
+          </span>
+          <span class="brand__name">Sequence</span>
+        </div>
+
+        <div class="stepper" id="stepper" aria-label="Transfer steps"></div>
+
+        <a class="icon-btn" href="./index.html" aria-label="Close and return to dashboard">
+          <span data-icon="close" data-icon-size="17"></span>
+        </a>
+      </header>
+
+      <main class="checkout__body">
+        <div class="checkout__col">
+          <div id="send-field"></div>
+          <div class="breakdown" id="breakdown"></div>
+          <div id="receive-field"></div>
+          <p class="arrival" id="arrival"></p>
+
+          <div class="checkout__actions">
+            <button type="button" class="icon-btn" aria-label="Schedule this transfer">
+              <span data-icon="calendarPlus" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="btn btn--teal btn--block">Continue</button>
+          </div>
+
+          <p class="checkout__note" id="note"></p>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="./assets/js/send.js"></script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+/* ==========================================================================
+   layout.css — app shell, sidebar, topbar, content grids, breakpoints
+   ========================================================================== */
+
+/* The shell owns the viewport; the content pane scrolls inside it, so both
+   columns always end together. */
+.app {
+  display: grid;
+  grid-template-columns: 272px minmax(0, 1fr);
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* --- sidebar -------------------------------------------------------------- */
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  background: var(--rail);
+  border-right: 1px solid var(--hairline);
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.rail__groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.rail__foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-top: var(--sp-4);
+}
+
+/* --- main ----------------------------------------------------------------- */
+
+.main {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  background: var(--surface);
+}
+
+.topbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--surface);
+}
+
+.topbar__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.content {
+  padding-inline: var(--sp-5);
+  padding-block: 0 var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+/* --- section grids -------------------------------------------------------- */
+
+.flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-3);
+}
+
+.bottom-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: var(--sp-3);
+}
+
+/* --- transfer flow page --------------------------------------------------- */
+
+.checkout {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+
+.checkout__body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-inline: var(--sp-5);
+  padding-block: var(--sp-6) var(--sp-6);
+}
+
+.checkout__col {
+  width: min(640px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* --- drawer scrim --------------------------------------------------------- */
+
+.scrim {
+  display: none;
+}
+
+/* --- breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1180px) {
+  .flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .bottom-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .app {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rail {
+    position: fixed;
+    z-index: 60;
+    left: 0;
+    top: 0;
+    width: 282px;
+    transform: translateX(-102%);
+    transition: transform 0.26s ease;
+  }
+  .app.is-nav-open .rail {
+    transform: none;
+  }
+  .app.is-nav-open .scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(0, 28, 44, 0.32);
+  }
+  .stat-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .content {
+    padding-inline: var(--sp-4);
+  }
+  .topbar {
+    padding-inline: var(--sp-4);
+  }
+  .checkout__body {
+    padding-inline: var(--sp-4);
+  }
+  .stat-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

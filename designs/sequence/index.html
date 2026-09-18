@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sequence Banking Dashboard</title>
+    <meta
+      name="description"
+      content="Sequence — a business banking dashboard: balance, cash flow, accounts and recent activity."
+    />
+    <meta name="theme-color" content="#025864" />
+    <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml" />
+
+    <!-- The brand guide specifies Helvetica. Apple devices have it; everyone
+         else falls to Arimo, metrically compatible with Arial and so with
+         Helvetica, which keeps the layout identical across platforms. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="./assets/css/tokens.css" />
+    <link rel="stylesheet" href="./assets/css/layout.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+  </head>
+
+  <body>
+    <div class="app">
+      <div class="scrim" aria-hidden="true"></div>
+
+      <!-- ============================== rail ============================== -->
+      <aside class="rail" aria-label="Sidebar">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="26" height="26" fill="currentColor">
+              <path d="M14 2a12 12 0 0 0 0 24V17.4a3.4 3.4 0 0 1 0-6.8V2Z" />
+              <path d="M14 2a12 12 0 0 1 0 24v-8.6a3.4 3.4 0 0 0 0-6.8V2Z" opacity=".55" />
+            </svg>
+          </span>
+          <span class="brand__name">Sequence</span>
+          <button type="button" class="brand__collapse" aria-label="Collapse sidebar">
+            <span data-icon="collapse" data-icon-size="15"></span>
+          </button>
+        </div>
+
+        <nav class="rail__groups" id="rail-nav" aria-label="Main"></nav>
+
+        <div class="rail__foot">
+          <button type="button" class="rail__item">
+            <span class="rail__icon" data-icon="settings" data-icon-size="19"></span>
+            <span class="grow">Settings</span>
+          </button>
+          <button type="button" class="rail__item">
+            <span class="rail__icon" data-icon="help" data-icon-size="19"></span>
+            <span class="grow">Help</span>
+          </button>
+          <button type="button" class="rail__item" id="pro-mode" aria-pressed="true">
+            <span class="rail__icon" data-icon="pro" data-icon-size="19"></span>
+            <span class="grow">Pro Mode</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="user-chip" id="user-chip"></button>
+          <p class="rail__copyright">@ 2024 Sequence Inc.</p>
+        </div>
+      </aside>
+
+      <!-- ============================== main ============================== -->
+      <div class="main">
+        <header class="topbar">
+          <button type="button" class="menu-btn" id="menu-btn" aria-label="Open navigation">
+            <span data-icon="menu" data-icon-size="18"></span>
+          </button>
+
+          <div class="search">
+            <span data-icon="search" data-icon-size="17"></span>
+            <label class="visually-hidden" for="q">Search</label>
+            <input id="q" type="search" placeholder="Search" autocomplete="off" />
+            <kbd>⌘ + F</kbd>
+          </div>
+
+          <div class="topbar__right">
+            <button type="button" class="btn btn--quiet">
+              <span data-icon="calendar" data-icon-size="16"></span>
+              18 Oct 2024 - 18 Nov 2024
+            </button>
+            <button type="button" class="btn btn--quiet">
+              Last 30 days <span data-icon="chevronDown" data-icon-size="16"></span>
+            </button>
+            <button type="button" class="btn btn--quiet">
+              <span data-icon="export" data-icon-size="16"></span> Export
+            </button>
+          </div>
+        </header>
+
+        <main class="content">
+          <section class="banner" id="banner" aria-label="Total balance"></section>
+
+          <section class="card" aria-labelledby="flow-title">
+            <div class="card__head">
+              <span data-icon="swap" data-icon-size="18" style="color: var(--teal)"></span>
+              <h2 id="flow-title">Cash Flow</h2>
+              <div class="spacer"></div>
+              <div class="seg" id="flow-seg" role="group" aria-label="Chart period">
+                <button type="button" aria-pressed="true">Weekly</button>
+                <button type="button" aria-pressed="false">Daily</button>
+              </div>
+              <button type="button" class="btn btn--quiet">
+                <span data-icon="settings" data-icon-size="16"></span> Manage
+              </button>
+            </div>
+            <div class="flow">
+              <div class="flow__chart"><svg class="chart" id="cashflow"></svg></div>
+              <div class="flow__totals" id="flow-totals"></div>
+            </div>
+          </section>
+
+          <section class="stat-row" id="stat-row" aria-label="Accounts"></section>
+
+          <div class="bottom-row">
+            <section class="card" aria-labelledby="activity-title">
+              <div class="card__head">
+                <span data-icon="pulse" data-icon-size="18" style="color: var(--teal)"></span>
+                <h2 id="activity-title">Recent Activity</h2>
+                <div class="spacer"></div>
+                <button type="button" class="btn btn--quiet">
+                  <span data-icon="filter" data-icon-size="16"></span> Filter
+                </button>
+                <button type="button" class="btn btn--quiet">
+                  <span data-icon="sort" data-icon-size="16"></span> Sort
+                </button>
+                <button type="button" class="icon-btn" aria-label="More">
+                  <span data-icon="more" data-icon-size="18"></span>
+                </button>
+              </div>
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">TYPE</th>
+                      <th scope="col">AMOUNT</th>
+                      <th scope="col">STATUS</th>
+                      <th scope="col">METHOD</th>
+                    </tr>
+                  </thead>
+                  <tbody id="activity-rows"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="card" aria-labelledby="cards-title">
+              <div class="card__head">
+                <span data-icon="cardSm" data-icon-size="18" style="color: var(--teal)"></span>
+                <h2 id="cards-title">My Cards</h2>
+                <div class="spacer"></div>
+                <a class="btn btn--quiet" href="./send.html">
+                  See All <span data-icon="arrowUpRight" data-icon-size="15"></span>
+                </a>
+              </div>
+              <div id="pay-card"></div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>

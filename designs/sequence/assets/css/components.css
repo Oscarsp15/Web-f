@@ -1,0 +1,830 @@
+/* ==========================================================================
+   components.css — every repeated object in the Sequence UI
+   A component's responsive overrides live in THIS file, next to the component,
+   so a later stylesheet cannot silently beat the media query.
+   ========================================================================== */
+
+/* --- primitives ----------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 38px;
+  padding-inline: var(--sp-4);
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: filter 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn--green {
+  background: var(--green);
+  color: #00301c;
+  font-weight: 600;
+}
+.btn--green:hover {
+  filter: brightness(1.05);
+}
+.btn--teal {
+  background: var(--teal);
+  color: #fff;
+}
+.btn--teal:hover {
+  filter: brightness(1.1);
+}
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+.btn--quiet {
+  background: var(--surface);
+  border-color: var(--hairline);
+  color: var(--ink);
+}
+.btn--quiet:hover {
+  background: var(--rail);
+}
+.btn--block {
+  width: 100%;
+  height: 48px;
+  font-size: 15px;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  color: var(--ink-2);
+  flex: none;
+}
+.icon-btn:hover {
+  background: var(--rail);
+  color: var(--ink);
+}
+.icon-btn--onteal {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+.icon-btn--onteal:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding-inline: 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pill--ok {
+  background: var(--pos-soft);
+  color: var(--pos);
+}
+.pill--wait {
+  background: var(--neutral-soft);
+  color: var(--ink-3);
+}
+.pill--brand {
+  background: var(--green-4);
+  color: #005c39;
+}
+
+.delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+.delta--up {
+  color: var(--pos);
+}
+.delta--down {
+  color: var(--neg);
+}
+.delta--onteal {
+  color: var(--green-2);
+}
+
+/* Small square icon tile — a brand tint behind a glyph. */
+.tile {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: #fff;
+}
+.tile--teal {
+  background: var(--teal);
+}
+.tile--green {
+  background: var(--green);
+  color: #00301c;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  box-shadow: var(--lift);
+}
+
+.card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+}
+.card__head h2 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+.card__head .spacer {
+  margin-left: auto;
+}
+
+/* --- sidebar -------------------------------------------------------------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--hairline);
+}
+.brand__name {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--teal);
+}
+.brand__mark {
+  color: var(--teal);
+  flex: none;
+}
+.brand__collapse {
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--hairline);
+  display: grid;
+  place-items: center;
+  color: var(--ink-3);
+  background: var(--surface);
+}
+
+.rail__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: var(--ink-3);
+  padding-inline: 10px;
+  margin-bottom: 6px;
+}
+
+.rail__item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  text-align: left;
+  padding: 9px 10px;
+  border-radius: var(--r-md);
+  color: var(--ink-2);
+  font-size: 14px;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+.rail__item:hover {
+  background: rgba(2, 88, 100, 0.06);
+  color: var(--ink);
+}
+.rail__item.is-active {
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 500;
+  box-shadow: var(--lift);
+}
+.rail__item.is-active .rail__icon {
+  color: var(--teal);
+}
+.rail__icon {
+  color: var(--ink-3);
+  flex: none;
+}
+.rail__item .grow {
+  flex: 1;
+}
+
+.toggle {
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--green);
+  position: relative;
+  flex: none;
+  transition: background 0.18s ease;
+}
+.toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 20px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left 0.18s ease;
+}
+[aria-pressed="false"] > .toggle {
+  background: #cfd5dd;
+}
+[aria-pressed="false"] > .toggle::after {
+  left: 2px;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  text-align: left;
+  padding: var(--sp-2);
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+}
+.user-chip__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: var(--teal-4);
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 12px;
+}
+.user-chip b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+.user-chip span {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.rail__copyright {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+/* --- topbar --------------------------------------------------------------- */
+
+.menu-btn {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  place-items: center;
+  color: var(--ink-2);
+  flex: none;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 40px;
+  width: min(320px, 42vw);
+  padding-inline: var(--sp-3);
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--ink-3);
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+}
+.search input::placeholder {
+  color: var(--ink-3);
+}
+.search kbd {
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* --- balance banner ------------------------------------------------------- */
+
+.banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--teal);
+  color: #fff;
+  padding: var(--sp-5) var(--sp-5);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+/* The motif: oversized rounded squares at ~4% white. Barely visible by design. */
+.banner__motif {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.07);
+}
+.banner__label {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.78);
+}
+.banner__amount {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  margin-top: 2px;
+}
+.banner__amount b {
+  font-size: clamp(26px, 3.2vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.8px;
+  font-variant-numeric: tabular-nums;
+}
+.banner__actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  position: relative;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .banner__actions {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* --- cash flow ------------------------------------------------------------ */
+
+.flow__chart {
+  padding: 0 var(--sp-4) var(--sp-4);
+  min-width: 0;
+}
+.chart {
+  width: 100%;
+  height: 260px;
+}
+.chart text {
+  font-family: var(--ui);
+  font-size: 11px;
+  fill: var(--ink-3);
+}
+
+.flow__totals {
+  border-left: 1px solid var(--hairline);
+  padding: var(--sp-2) var(--sp-4) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-4);
+}
+.total-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.total-row + .total-row {
+  border-top: 1px solid var(--hairline);
+  padding-top: var(--sp-4);
+}
+.total-row__label {
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.total-row__value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1180px) {
+  .flow__totals {
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+.seg {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+}
+.seg button {
+  padding: 5px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  color: var(--ink-3);
+  transition: background 0.16s ease, color 0.16s ease;
+}
+.seg button[aria-pressed="true"] {
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 500;
+  box-shadow: var(--lift);
+  border: 1px solid var(--hairline);
+  padding: 4px 11px;
+}
+
+/* --- stat cards ----------------------------------------------------------- */
+
+.stat {
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.stat__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--ink-2);
+  font-size: 14px;
+}
+.stat__head .when {
+  margin-left: auto;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.stat__value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.6px;
+  font-variant-numeric: tabular-nums;
+}
+.stat__foot {
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+/* --- activity table ------------------------------------------------------- */
+
+.table-wrap {
+  overflow-x: auto;
+}
+.table {
+  min-width: 560px;
+}
+.table thead th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ink-3);
+  padding: var(--sp-2) var(--sp-4);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface);
+}
+.table td {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--hairline-2);
+  vertical-align: middle;
+}
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.cell-who {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.cell-who__mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: none;
+  background: var(--pos-soft);
+  color: var(--pos);
+}
+.cell-who b {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
+.cell-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.table td b {
+  display: block;
+  font-weight: 500;
+}
+.cell-amount b {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- payment card --------------------------------------------------------- */
+
+.paycard {
+  position: relative;
+  overflow: hidden;
+  margin: 0 var(--sp-4) var(--sp-4);
+  border-radius: var(--r-lg);
+  background: var(--teal);
+  color: #fff;
+  padding: var(--sp-4);
+  aspect-ratio: 1.62;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 100%;
+}
+.paycard__motif {
+  position: absolute;
+  inset: 0;
+  color: rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+.paycard__top {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  position: relative;
+}
+.paycard__brand {
+  font-size: 17px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.4px;
+}
+.paycard__number {
+  margin-left: auto;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+}
+.paycard__amount {
+  position: relative;
+  font-size: 22px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+/* The stacked card peeking out from behind. */
+.paycard-stack {
+  position: relative;
+  margin: 0 var(--sp-4) 0;
+  height: 10px;
+}
+.paycard-stack::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 0;
+  height: 22px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  background: var(--green);
+}
+
+/* --- transfer flow -------------------------------------------------------- */
+
+.checkout__bar {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--rail);
+  border-bottom: 1px solid var(--hairline);
+}
+.checkout__bar .brand {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.stepper {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  max-width: 640px;
+  margin-inline: auto;
+}
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.step__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #cfd5dd;
+  background: var(--surface);
+  z-index: 1;
+}
+.step.is-current {
+  color: var(--ink);
+  font-weight: 500;
+}
+.step.is-current .step__dot {
+  border-color: var(--green);
+  background: var(--green);
+  box-shadow: 0 0 0 3px var(--green-4);
+}
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #d7dde4;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  transition: border-color 0.16s ease;
+}
+.field:focus-within {
+  border-color: var(--teal-3);
+}
+.field input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  font: inherit;
+  font-size: 24px;
+  letter-spacing: -0.4px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.field__label {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  margin-bottom: 7px;
+}
+.currency {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 6px 8px 6px 6px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  flex: none;
+}
+.currency:hover {
+  background: var(--rail);
+}
+.currency__flag {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex: none;
+  overflow: hidden;
+}
+
+.breakdown {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.breakdown__row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  font-size: 14px;
+}
+/* The operator glyph is what makes this read as a calculation, not a list. */
+.breakdown__op {
+  width: 14px;
+  flex: none;
+  text-align: center;
+  color: var(--teal-2);
+  font-size: 13px;
+}
+.breakdown__row .label {
+  color: var(--ink-2);
+}
+.breakdown__row .label.is-linked {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--hairline);
+}
+.breakdown__row .value {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.breakdown__rule {
+  border-top: 1px solid var(--hairline);
+  margin-block: 2px;
+}
+
+.arrival {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.arrival b {
+  color: var(--ink);
+  font-weight: 500;
+}
+.checkout__actions {
+  display: flex;
+  gap: var(--sp-3);
+}
+.checkout__note {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  max-width: 62ch;
+}
+
+/* --- responsive overrides owned by their components ----------------------- */
+
+@media (max-width: 1000px) {
+  .menu-btn {
+    display: grid;
+  }
+}
+
+@media (max-width: 720px) {
+  .search {
+    width: 100%;
+    order: 3;
+  }
+  .stepper {
+    display: none;
+  }
+}

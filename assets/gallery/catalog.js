@@ -5,9 +5,10 @@
  * host cannot be asked what is in a folder. Add a reference doc here when you
  * add one to the skill.
  *
- * The skill documents themselves stay in English: they are the same files
- * Claude Code loads, and a translated copy would be a second source that drifts
- * from the first. The interface around them switches.
+ * Skill documents are served in the active language from `<base>es/<path>`, with
+ * the English original as the fallback. English stays the source of truth — it is
+ * the file Claude Code loads — and every translation says so in its own header, so
+ * a reader always knows which copy can drift.
  */
 
 export const UI = {
@@ -32,7 +33,8 @@ export const UI = {
     openShot: 'Open',
     skillSuffix: 'skill',
     loading: 'Loading…',
-    docsNote: 'Skill documents are kept in English — they are the files the agent loads.',
+    docsNote: 'The English original is the source of truth — it is the file the agent loads.',
+    fallbackNote: 'No Spanish version of this document yet; showing the English original.',
     errorTitle: 'This document could not be loaded here',
     errorLead: 'Read it in the repository:',
     footer: 'Rebuilt for practice. Each design belongs to its original author on Dribbble.',
@@ -61,7 +63,9 @@ export const UI = {
     skillSuffix: 'skill',
     loading: 'Cargando…',
     docsNote:
-      'Las skills se mantienen en inglés: son los mismos ficheros que carga el agente.',
+      'El original en inglés es la fuente de verdad: es el fichero que carga el agente.',
+    fallbackNote:
+      'Aún no hay versión en español de este documento; se muestra el original en inglés.',
     errorTitle: 'Este documento no se ha podido cargar aquí',
     errorLead: 'Léelo en el repositorio:',
     footer:

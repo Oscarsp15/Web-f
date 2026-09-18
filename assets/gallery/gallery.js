@@ -112,7 +112,9 @@ const cache = new Map();
 async function showDoc(design, index) {
   const t = UI[lang];
   const file = design.skill.files[index];
-  const url = design.skill.base + file.path;
+  const english = design.skill.base + file.path;
+  // Spanish lives in a mirror folder; English is the fallback and the source.
+  const url = lang === 'es' ? `${design.skill.base}es/${file.path}` : english;
   activeDoc = index;
 
   viewerPath.textContent = url.replace('./', '');
@@ -130,13 +132,18 @@ async function showDoc(design, index) {
   try {
     let html = cache.get(url);
     if (!html) {
-      const res = await fetch(url, { cache: 'no-cache' });
+      let res = await fetch(url, { cache: 'no-cache' });
+      let note = '';
+      if (!res.ok && url !== english) {
+        res = await fetch(english, { cache: 'no-cache' });
+        note = `<p class="doc__meta">${t.fallbackNote}</p>`;
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const { meta, body } = frontmatter(await res.text());
       const header = meta.description
         ? `<p class="doc__meta"><strong>${meta.name || design.skill.id}</strong> — ${meta.description}</p>`
         : '';
-      html = `<div class="doc">${header}${renderMarkdown(body)}</div>`;
+      html = `<div class="doc">${note}${header}${renderMarkdown(body)}</div>`;
       cache.set(url, html);
     }
     pending = false;

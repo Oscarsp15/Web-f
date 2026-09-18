@@ -8,14 +8,16 @@ how it was made**.
 
 ## What's here
 
-| Design | Screens | Theme | Skill |
+| Design | Screens | Kind | Skill |
 |---|---|---|---|
-| **Stakent** — crypto staking dashboard | Dashboard | Dark | `.claude/skills/stakent-dashboard/` |
-| **Sequence** — business banking | Dashboard, Transfer | Light | `.claude/skills/sequence-fintech/` |
+| **Stakent** — crypto staking dashboard | Dashboard | Dark product UI | `.claude/skills/stakent-dashboard/` |
+| **Sequence** — business banking | Dashboard, Transfer | Light product UI | `.claude/skills/sequence-fintech/` |
+| **Camellia** — course workbook | Template sheet | Editorial / print | `.claude/skills/editorial-workbook/` |
 
-The gallery at the root lists both, links to each screen, and renders the skill
-documents in place — it fetches the same `.md` files Claude Code loads, so there is
-no second copy to drift.
+The gallery at the root lists all three, links to each screen, and renders the skill
+documents in place. It fetches the same `.md` files Claude Code loads, in the
+language the page is set to: Spanish translations live under `<skill>/es/` and the
+English original is both the fallback and the source of truth.
 
 ## Structure
 
@@ -25,7 +27,8 @@ assets/gallery/                 # gallery styles, catalogue, markdown renderer
 assets/previews/                # real screenshots of each design
 designs/stakent/                # dark staking dashboard
 designs/sequence/               # light fintech dashboard + transfer flow
-.claude/skills/<name>/SKILL.md  # the recipe, with references/ alongside
+designs/workbook/               # editorial course-workbook template
+.claude/skills/<name>/SKILL.md  # the recipe, with references/ and es/ alongside
 ```
 
 Every design follows the same layout: `assets/css/{tokens,layout,components}.css`
@@ -47,6 +50,11 @@ Both skills exist because copying a design by eye does not work. The short versi
 - **If a brand guide is in the set, it outranks your measurements** for brand
   colors — and your measurements still decide the neutrals, which guides never
   document.
+- **The method has limits, and they get stated.** On a 600px template sheet the
+  heading is 14px tall, so the glyph ranking has nothing to work with; that pick was
+  made by eye on a 4x crop and says so. Sampling the "most saturated" pixel also
+  fails on cream — antialiased text wins that metric — so the accent there came from
+  a colour-family mode instead.
 
 The full write-ups, including the mistakes that cost a round, are in the skills.
 

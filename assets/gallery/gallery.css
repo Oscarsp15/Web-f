@@ -330,6 +330,10 @@ ul {
 .entry__theme--light::before {
   background: #ffffff;
 }
+.entry__theme--paper::before {
+  background: #a45c45;
+  border-color: #a45c45;
+}
 
 .entry h2 {
   margin-top: 8px;

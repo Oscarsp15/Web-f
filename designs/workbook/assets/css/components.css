@@ -1,0 +1,330 @@
+/* ==========================================================================
+   components.css — the workbook's page objects
+
+   Everything is built around one unit: `.page`, a fixed-ratio sheet of paper.
+   Its contents scale with container queries so the same markup works as a
+   thumbnail in the wall and as a full-size page in a row.
+   ========================================================================== */
+
+.page {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: var(--page-ratio);
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* The sheet sits on a warm ground, so the shadow carries the ground's hue.
+     A neutral grey shadow on cream reads as dirt. */
+  box-shadow: 0 1px 2px rgba(80, 56, 42, 0.06);
+}
+.page--clay {
+  background: var(--clay);
+  color: var(--paper);
+  border-color: transparent;
+}
+.page--warm {
+  background: var(--paper-warm);
+}
+
+/* Type inside a page is expressed in container query units so a page keeps its
+   internal proportions whether it is 120px or 520px wide. */
+.page__body {
+  flex: 1;
+  min-height: 0;
+  padding: 6cqw;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4cqw;
+}
+
+.page__eyebrow {
+  font-family: var(--ui);
+  font-size: 2.1cqw;
+  letter-spacing: 0.22cqw;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+.page--clay .page__eyebrow {
+  color: rgba(251, 248, 244, 0.72);
+}
+
+.page__title {
+  font-family: var(--display);
+  font-size: 9cqw;
+  line-height: 1.02;
+  letter-spacing: -0.14cqw;
+}
+.page__title--sm {
+  font-size: 6.4cqw;
+}
+.page__sub {
+  font-family: var(--ui);
+  font-size: 2.4cqw;
+  letter-spacing: 0.34cqw;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.page--clay .page__sub {
+  color: rgba(251, 248, 244, 0.8);
+}
+
+.page__text {
+  font-size: 2.3cqw;
+  line-height: 1.62;
+  color: var(--ink-2);
+}
+.page--clay .page__text {
+  color: rgba(251, 248, 244, 0.88);
+}
+
+/* --- the arch: the motif that carries this template ----------------------- */
+
+.arch {
+  position: relative;
+  overflow: hidden;
+  /* A half-round top is the whole signature. Radius = half the width, so the
+     curve stays a true semicircle at any size. */
+  border-radius: 50cqw 50cqw 0 0;
+  background: linear-gradient(170deg, var(--clay-tint), var(--clay-wash) 62%, #e8d6cb);
+}
+.arch--full {
+  border-radius: 50cqw;
+}
+.arch--soft {
+  border-radius: 46% 46% 6% 6%;
+}
+/* Stand-in for photography. Real portraits belong to their photographer, so the
+   image wells are drawn instead — and drawn as *graphics*, not as pseudo-photos.
+   An earlier version put a soft figure-shaped mass in here and it read as an
+   out-of-focus photograph, i.e. as a rendering fault rather than a choice.
+   Concentric arcs in the template's own clay say "image goes here" honestly. */
+.arch::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+.arch::after {
+  content: "";
+  position: absolute;
+  inset: 30%;
+  border-radius: inherit;
+  border: 1px solid rgba(140, 75, 55, 0.22);
+}
+.arch {
+  background:
+    linear-gradient(168deg, var(--clay-tint) 0%, #dcbdae 46%, var(--clay-wash) 100%);
+}
+
+/* --- badge, rules, meta rows --------------------------------------------- */
+
+.badge {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--clay);
+  color: var(--paper);
+  text-align: center;
+  font-family: var(--ui);
+  text-transform: uppercase;
+}
+
+.rule-row {
+  display: flex;
+  align-items: center;
+  gap: 2.4cqw;
+  font-family: var(--ui);
+  font-size: 2.3cqw;
+  letter-spacing: 0.3cqw;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.rule-row::before,
+.rule-row::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.6cqw;
+  padding-top: 2.6cqw;
+  border-top: 1px solid var(--rule);
+}
+.meta-grid p {
+  font-size: 2.1cqw;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 2.4cqw;
+}
+.author__portrait {
+  width: 8cqw;
+  height: 8cqw;
+  border-radius: 50%;
+  flex: none;
+  background: linear-gradient(160deg, var(--clay-tint), var(--clay-wash));
+}
+.author b {
+  display: block;
+  font-family: var(--display);
+  font-size: 2.8cqw;
+  font-weight: 400;
+}
+.author span {
+  display: block;
+  font-family: var(--ui);
+  font-size: 1.9cqw;
+  letter-spacing: 0.2cqw;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.dots {
+  display: flex;
+  gap: 1.2cqw;
+  align-items: center;
+}
+.dots i {
+  width: 1.6cqw;
+  height: 1.6cqw;
+  border-radius: 50%;
+  background: var(--clay-wash);
+}
+.dots i:first-child {
+  background: var(--clay);
+}
+
+/* --- contents list -------------------------------------------------------- */
+
+.toc {
+  display: flex;
+  flex-direction: column;
+}
+.toc li {
+  display: flex;
+  align-items: baseline;
+  gap: 2cqw;
+  padding-block: 1.9cqw;
+  border-bottom: 1px solid var(--rule-2);
+}
+.toc b {
+  font-family: var(--display);
+  font-size: 2.9cqw;
+  font-weight: 400;
+}
+.toc span {
+  font-size: 2cqw;
+  color: var(--ink-3);
+}
+.toc em {
+  margin-left: auto;
+  font-style: normal;
+  font-family: var(--ui);
+  font-size: 2.1cqw;
+  color: var(--clay);
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3cqw;
+}
+
+/* --- page footer strip ---------------------------------------------------- */
+
+.page__foot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+  padding: 3cqw 6cqw;
+  border-top: 1px solid var(--rule);
+  font-family: var(--ui);
+  font-size: 1.9cqw;
+  letter-spacing: 0.24cqw;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.page__foot span:last-child {
+  margin-left: auto;
+}
+
+/* --- caption under a page ------------------------------------------------- */
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.figure figcaption {
+  font-family: var(--ui);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* --- brand lockup --------------------------------------------------------- */
+
+.lockup {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.lockup__seal {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: var(--clay);
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 19px;
+}
+.lockup b {
+  display: block;
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+}
+.lockup span {
+  display: block;
+  font-family: var(--ui);
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* --- thumbnails in the wall need slightly bigger relative type ------------ */
+
+.wall .page__body {
+  padding: 7cqw;
+  gap: 3cqw;
+}
+.wall .page__title {
+  font-size: 11cqw;
+}
+.wall .page__text {
+  font-size: 3.4cqw;
+  line-height: 1.5;
+}
+.wall .page__eyebrow {
+  font-size: 3cqw;
+}

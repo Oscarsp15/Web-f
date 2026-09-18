@@ -23,9 +23,9 @@ export const UI = {
       'rebuild sits the skill that documents how it was made: how the palette was ' +
       'measured, how the typeface was identified, and which mistakes cost a round.',
     stats: [
-      ['2', 'designs'],
-      ['3', 'screens'],
-      ['11', 'skill documents'],
+      ['3', 'designs'],
+      ['4', 'screens'],
+      ['14', 'skill documents'],
       ['0', 'dependencies'],
     ],
     openDesign: 'Open the design',
@@ -52,9 +52,9 @@ export const UI = {
       'Junto a cada reconstrucción está la skill que documenta cómo se hizo: cómo se ' +
       'midió la paleta, cómo se identificó la tipografía y qué errores costaron una ronda.',
     stats: [
-      ['2', 'diseños'],
-      ['3', 'pantallas'],
-      ['11', 'documentos de skill'],
+      ['3', 'diseños'],
+      ['4', 'pantallas'],
+      ['14', 'documentos de skill'],
       ['0', 'dependencias'],
     ],
     openDesign: 'Abrir el diseño',
@@ -169,6 +169,49 @@ export const DESIGNS = [
         { path: 'references/screens.md', label: { en: 'Screens', es: 'Pantallas' } },
         { path: 'references/charts.md', label: { en: 'Charts', es: 'Gráficos' } },
         { path: 'references/light-theme.md', label: { en: 'Light theme', es: 'Tema claro' } },
+      ],
+    },
+  },
+  {
+    id: 'workbook',
+    name: 'Camellia',
+    theme: 'paper',
+    kind: { en: 'Course workbook template', es: 'Plantilla de workbook' },
+    themeLabel: { en: 'Editorial', es: 'Editorial' },
+    blurb: {
+      en:
+        'A print template rather than a product UI: a 100-page course workbook for ' +
+        'coaches, presented as a sheet of cover designs and contents layouts.',
+      es:
+        'Una plantilla impresa, no una UI de producto: un workbook de 100 páginas para ' +
+        'coaches, presentado como lámina de portadas y maquetas de contenidos.',
+    },
+    built: {
+      en: [
+        'Accent found by colour-family mode — saturation returns near-black on cream',
+        'Pages scale by container queries, tracking included',
+        'Photography replaced by drawn image wells',
+      ],
+      es: [
+        'Acento hallado por moda de familia — la saturación devuelve casi negro en crema',
+        'Las páginas escalan con container queries, tracking incluido',
+        'Fotografía sustituida por huecos de imagen dibujados',
+      ],
+    },
+    screens: [
+      {
+        label: { en: 'Template sheet', es: 'Lámina de plantilla' },
+        href: './designs/workbook/',
+        preview: './assets/previews/workbook.png',
+      },
+    ],
+    skill: {
+      id: 'editorial-workbook',
+      base: './.claude/skills/editorial-workbook/',
+      files: [
+        { path: 'SKILL.md', label: 'SKILL.md' },
+        { path: 'references/motif-and-palette.md', label: { en: 'Motif & palette', es: 'Motivo y paleta' } },
+        { path: 'references/type.md', label: { en: 'Type', es: 'Tipografía' } },
       ],
     },
   },

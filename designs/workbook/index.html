@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Camellia Course Workbook</title>
+    <meta
+      name="description"
+      content="Camellia — a 100-page course workbook template for coaches: cover designs, contents layouts and editorial page system."
+    />
+    <meta name="theme-color" content="#f0e7e0" />
+    <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml" />
+
+    <!-- Lora for display: the reference heading has low stroke contrast and
+         sturdy bracketed serifs. Jost for the letterspaced uppercase labels. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Jost:wght@300;400;500&display=swap"
+    />
+
+    <link rel="stylesheet" href="./assets/css/tokens.css" />
+    <link rel="stylesheet" href="./assets/css/layout.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+  </head>
+
+  <body>
+    <main class="sheet">
+      <!-- ============================== hero ============================== -->
+      <section class="hero" aria-label="Workbook overview">
+        <div>
+          <div class="wall" id="wall"></div>
+          <div class="hero__brand">
+            <span class="lockup__seal">C</span>
+            <p class="serif" id="kicker" style="font-size: 19px"></p>
+          </div>
+        </div>
+        <div id="hero-cover"></div>
+      </section>
+
+      <!-- ============================ covers ============================== -->
+      <section class="band" aria-labelledby="covers-title">
+        <div class="band__head" id="covers-head"></div>
+        <div class="page-row" id="covers"></div>
+      </section>
+
+      <!-- =========================== contents ============================= -->
+      <section class="band" aria-labelledby="contents-title">
+        <div class="band__head" id="contents-head"></div>
+        <div class="page-row" id="contents-row"></div>
+      </section>
+
+      <footer class="colophon">
+        <span class="label">Camellia Sills · Luctus Edition</span>
+        <span
+          >A template presentation rebuilt in HTML and CSS. The portraits in the
+          original are replaced by drawn fields — photography belongs to its
+          photographer.</span
+        >
+        <a href="../../">← Back to the gallery</a>
+      </footer>
+    </main>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>

@@ -58,3 +58,33 @@ glyph: white on teal, dark green on brand green. Never brand green with white.
 Success is `--pos` text on `--pos-soft`; pending is `--ink-3` on a neutral tint.
 Both are quiet. In a banking UI, a loud "Pending" chip reads as an error, and the
 row's meaning should come from its content, not from how much the badge shouts.
+
+## What a phone does to this layout
+
+The dashboard's chrome is dense — a search field, a date range, a period selector
+and Export across the top; three action buttons in every card head. None of that
+fits a 390px row, and the first instinct (let it wrap) is only half the fix.
+
+Measured on this build:
+
+| | before | after |
+|---|---|---|
+| top bar height at 390px | 218px | 122px |
+| sideways scroll in the content pane | 14–163px | 0 |
+
+What changed was the **priority**, not the sizes:
+
+- Search is primary: row one, `flex: 1`, beside the menu button.
+- Date range, period and Export are secondary: row two, in a strip that scrolls
+  sideways deliberately, so they cost no vertical space they have not earned.
+- The `⌘ + F` hint is hidden below the breakpoint. There is no Command key on a
+  phone; a hint that cannot be acted on is decoration pretending to be help.
+- The banner's four actions become a 2×2 grid. Wrapping left the overflow `…`
+  button alone on its own row, which reads as breakage rather than as layout.
+- Card heads get `flex-wrap: wrap`; without it the third action button pushed the
+  whole pane sideways by 14px.
+
+Both overflow bugs were the same shape — **a flex row without `flex-wrap`** — and
+neither was visible in a screenshot. See `../../stakent-dashboard/references/ux-engineering.md`
+for the general version of this, and `../../stakent-dashboard/references/verification.md`
+for the check that catches it.

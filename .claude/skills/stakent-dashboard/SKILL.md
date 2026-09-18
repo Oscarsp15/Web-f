@@ -8,7 +8,7 @@ description: Rebuild a dark crypto-staking dashboard in the Stakent style, or an
 Turn a dashboard screenshot into a working page whose color and type **match** the
 original rather than merely resembling it.
 
-## The one rule
+## Two rules
 
 **Measure the reference; do not eyeball it.**
 
@@ -17,6 +17,12 @@ every value I measured survived review. The page looked fine at each stage — t
 is exactly why eyeballing is dangerous. "A dark dashboard" and *this* dark
 dashboard differ by about ten points of lightness and a hue cast you cannot name
 from memory.
+
+**Then design everything the screenshot does not contain.** A mockup is one state,
+at one width, with ideal content — maybe 5% of what ships. Matching it perfectly
+and stopping there produces a page that is pixel-correct at 1440 and unusable on a
+phone. That happened here: the rebuild was reported clean and a user found the
+content pane sliding sideways under their thumb.
 
 ## Order of work
 
@@ -27,7 +33,10 @@ from memory.
 3. **Rank typefaces by glyph overlap** → `references/font-matching.md`
 4. **Build** on the module layout, watching the four traps →
    `references/architecture.md`
-5. **Verify, then report honestly** → `references/verification.md`
+5. **Design the 95% the screenshot does not contain** — other widths, interaction
+   states, empty and error content, touch and keyboard →
+   `references/ux-engineering.md`
+6. **Verify, then report honestly** → `references/verification.md`
 
 ## What the measurements actually said
 

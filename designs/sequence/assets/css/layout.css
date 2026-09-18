@@ -59,6 +59,9 @@
   z-index: 30;
   display: flex;
   align-items: center;
+  /* Without this the bar cannot wrap, so its three long buttons force the
+     content pane to scroll sideways on a phone. */
+  flex-wrap: wrap;
   gap: var(--sp-3);
   padding: var(--sp-4) var(--sp-5);
   background: var(--surface);

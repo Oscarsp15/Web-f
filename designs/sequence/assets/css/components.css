@@ -153,6 +153,9 @@
 .card__head {
   display: flex;
   align-items: center;
+  /* Same lesson as the top bar: a head with three action buttons cannot fit a
+     phone row, and without wrap it pushes the whole pane sideways. */
+  flex-wrap: wrap;
   gap: var(--sp-2);
   padding: var(--sp-4) var(--sp-4) var(--sp-3);
 }
@@ -160,6 +163,7 @@
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.1px;
+  white-space: nowrap;
 }
 .card__head .spacer {
   margin-left: auto;
@@ -396,8 +400,16 @@
 }
 
 @media (max-width: 720px) {
+  /* Four actions will not fit one phone row, and a lone overflow button on a
+     second row reads as a mistake. Two by two, full-width touch targets. */
   .banner__actions {
     margin-left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2);
+  }
+  .banner__actions .icon-btn {
     width: 100%;
   }
 }
@@ -820,9 +832,25 @@
 }
 
 @media (max-width: 720px) {
+  /* Row 1 is menu + search; row 2 is the secondary controls, which scroll
+     sideways on purpose instead of stacking into 100px of chrome. */
   .search {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+  .search kbd {
+    display: none; /* there is no Command key on a phone */
+  }
+  .topbar__right {
+    margin-left: 0;
     width: 100%;
-    order: 3;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .topbar__right::-webkit-scrollbar {
+    display: none;
   }
   .stepper {
     display: none;

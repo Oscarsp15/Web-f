@@ -31,9 +31,54 @@ module throws halfway and leaves an empty container that a thumbnail would show 
 
 ## Checks
 
-**Horizontal overflow must be exactly 0** at 1440 and 390. Anything else means
-something is wider than the viewport. When it is not zero, find the culprit rather
-than guessing:
+**Horizontal overflow must be exactly 0 — in every scroll container, not just the
+document.** This is the check I got wrong, and a user found it on a real phone
+after I had reported the page clean.
+
+With an app-shell layout the document never scrolls:
+
+```css
+.app  { height: 100dvh; overflow: hidden; }
+.main { overflow-y: auto; }          /* overflow-x computes to auto as well */
+```
+
+so `document.documentElement.scrollWidth - clientWidth` is **0 by construction**,
+while `.main` slides sideways under the user's thumb. Check every element whose
+computed `overflow-x` is `auto` or `scroll`, plus the document:
+
+```js
+const INTENTIONAL = ['table-wrap', 'topbar__right'];   // deliberate scrollers
+const bad = [];
+const check = (el, label) => {
+  const over = el.scrollWidth - el.clientWidth;
+  if (over > 1 && !INTENTIONAL.some((c) => el.classList?.contains(c))) {
+    bad.push(`${label} +${over}px`);
+  }
+};
+check(document.documentElement, 'document');
+document.querySelectorAll('*').forEach((el) => {
+  const ox = getComputedStyle(el).overflowX;
+  if (ox === 'auto' || ox === 'scroll') check(el, el.className);
+});
+```
+
+Two traps inside the fix itself:
+
+1. **Do not excuse an element because an ancestor clips it.** My first corrected
+   checker skipped any node with a clipping ancestor — which skipped `.main`,
+   whose parent is `overflow: hidden`. It reported all-clear while 14px of
+   sideways scroll remained.
+2. **Allowlist deliberate scrollers explicitly**, by class. A wide table inside
+   `overflow-x: auto` is the designed behaviour; silently excusing *every*
+   `auto` container hides real bugs.
+
+Both offenders on this project were the same shape: a flex row without
+`flex-wrap`. A top bar with three long buttons, and a card head with three action
+buttons — neither could wrap, so both pushed the pane sideways at 390px. Run the
+check at 360, 390, 414, 768, 1024 and 1440; 24 combinations across four pages took
+seconds and is the difference between "looks fine" and "is fine".
+
+When something does overflow, find the culprit rather than guessing:
 
 ```js
 const vw = document.documentElement.clientWidth;

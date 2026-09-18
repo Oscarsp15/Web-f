@@ -31,6 +31,7 @@ export const DESIGNS = [
         { path: 'references/measuring-color.md', label: 'Measuring color' },
         { path: 'references/font-matching.md', label: 'Font matching' },
         { path: 'references/architecture.md', label: 'Architecture' },
+        { path: 'references/ux-engineering.md', label: 'UX engineering' },
         { path: 'references/verification.md', label: 'Verification' },
       ],
     },

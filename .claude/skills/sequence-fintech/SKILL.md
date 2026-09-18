@@ -29,8 +29,26 @@ screens and the guide are the same version of the brand.
    document hairlines, hovers or state colors; measure those.
 3. **Lay out the screens** → `references/screens.md`
 4. **The chart is the hard part** → `references/charts.md`
-5. **Light-theme craft** — hairlines over fills → `references/light-theme.md`
-6. **Verify and report** — reuse `stakent-dashboard/references/verification.md`.
+5. **Light-theme craft** — hairlines over fills, and what a phone does to this
+   dense chrome → `references/light-theme.md`
+6. **Design the states the mockup does not show** — other widths, hover and focus,
+   empty and error, touch and keyboard →
+   `../stakent-dashboard/references/ux-engineering.md`
+7. **Verify and report** → `../stakent-dashboard/references/verification.md`, and
+   check **every scroll container**, not just the document: this shell keeps the
+   document at zero overflow while the content pane slides under your thumb.
+
+## This is a product, not a picture
+
+A banking screen is operated, not read. Two consequences that outrank visual
+fidelity when they conflict with it:
+
+- **Semantic color is separate from brand color.** Success, pending and danger form
+  a scale the user reads at a glance; they are not decoration and they are not the
+  accent.
+- **Figures are tabular.** `font-variant-numeric: tabular-nums` wherever amounts
+  stack — the table, the stat cards, the chart axis, the balance. Proportional
+  digits in a column of money is the most common tell of a rebuilt fintech screen.
 
 ## The three things most likely to go wrong
 

@@ -118,6 +118,13 @@
   flex-wrap: wrap;
   padding-bottom: var(--sp-4);
 }
+@media (max-width: 720px) {
+  /* The stage already gives the card a margin; a full top inset on top of it
+     pushes the first row of stock below the fold. */
+  .main {
+    padding-top: var(--sp-4);
+  }
+}
 .main__scroll {
   flex: 1;
   min-height: 0;

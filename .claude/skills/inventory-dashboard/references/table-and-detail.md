@@ -114,3 +114,31 @@ silently becomes zero rows looks broken.
 The view toggle in the toolbar is not decoration either — it is two buttons with
 `aria-pressed`, and the grid is a real alternative rendering of the same filtered
 list. Reuse the data and the filter; only the markup function changes.
+
+## On a phone, the toggle stops being optional
+
+Eight columns do not fit in 390px. The table's `overflow-x: auto` wrapper keeps it
+usable, but a screen whose first impression is "ID Number" and half a name has
+failed. So the grid view becomes the **default** below 720px:
+
+```js
+let view = window.matchMedia('(max-width: 720px)').matches ? 'grid' : 'list';
+```
+
+Read the media query once at module load, not on every render — the user's toggle
+must win from the first tap, and re-reading it would keep overriding them.
+
+Three more things break at phone width, and each has a one-rule fix:
+
+- **The filter bar stacks.** Four `flex-wrap` controls become four rows of chrome
+  before any stock is visible. Switch that one row to `flex-wrap: nowrap;
+  overflow-x: auto` with the scrollbar hidden, and add `flex: none` to the children
+  so they keep their natural width instead of being squeezed. This is a deliberate
+  sideways scroller — **add its class to your overflow checker's allowlist**, or the
+  checker will report it forever and you will learn to ignore the checker.
+- **The detail image turns into a tall void.** `grid-row: span 3` is right beside
+  three rows of fields; in the one-column grid it reserves three empty rows. Reset
+  it to `grid-row: auto` and cap it with `max-width`.
+- **The square card shows two items per screen.** Lay the tile on its side —
+  `grid-template-columns: 76px minmax(0, 1fr)` with the thumbnail at `grid-row:
+  span 3` — and the same card shows six. A stock list exists to be scanned.

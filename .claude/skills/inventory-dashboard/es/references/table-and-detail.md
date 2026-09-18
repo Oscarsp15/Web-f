@@ -119,3 +119,34 @@ queda en cero filas en silencio parece rota.
 El conmutador de vista de la barra tampoco es decoración: son dos botones con
 `aria-pressed`, y la rejilla es una representación alternativa real de la misma lista
 filtrada. Reutiliza los datos y el filtro; solo cambia la función de marcado.
+
+## En el móvil el conmutador deja de ser opcional
+
+Ocho columnas no caben en 390px. El envoltorio con `overflow-x: auto` de la tabla la
+mantiene usable, pero una pantalla cuya primera impresión es «ID Number» y medio
+nombre ha fracasado. Así que por debajo de 720px la vista de rejilla pasa a ser la
+**predeterminada**:
+
+```js
+let view = window.matchMedia('(max-width: 720px)').matches ? 'grid' : 'list';
+```
+
+Lee la media query una vez al cargar el módulo, no en cada repintado: el conmutador
+del usuario debe mandar desde el primer toque, y releerla lo estaría sobrescribiendo.
+
+Otras tres cosas se rompen al ancho de un teléfono, y cada una se arregla con una
+regla:
+
+- **La barra de filtros se apila.** Cuatro controles con `flex-wrap` se convierten en
+  cuatro filas de cromo antes de que se vea una sola referencia. Pasa esa fila a
+  `flex-wrap: nowrap; overflow-x: auto` con la barra de desplazamiento oculta, y da
+  `flex: none` a los hijos para que conserven su ancho natural en vez de comprimirse.
+  Es un desplazamiento lateral deliberado: **añade su clase a la lista blanca de tu
+  comprobador de desbordes**, o el comprobador lo denunciará para siempre y acabarás
+  ignorando al comprobador.
+- **La imagen del detalle se convierte en un hueco alto.** `grid-row: span 3` es
+  correcto junto a tres filas de campos; en la rejilla de una columna reserva tres
+  filas vacías. Devuélvela a `grid-row: auto` y acótala con `max-width`.
+- **La tarjeta cuadrada muestra dos artículos por pantalla.** Tumba la ficha —
+  `grid-template-columns: 76px minmax(0, 1fr)` con la miniatura en `grid-row: span 3`
+  — y la misma tarjeta muestra seis. Una lista de existencias existe para ojearse.

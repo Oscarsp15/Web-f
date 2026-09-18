@@ -13,7 +13,9 @@ import { hydrateIcons } from '../icons.js';
 const esc = (s = '') =>
   String(s).replace(/[<>&"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' })[c]);
 
-let view = 'list';
+// An eight-column table is unreadable at 390px, so phones open on the card
+// view. The toggle still switches to the table, which scrolls in its wrapper.
+let view = window.matchMedia('(max-width: 720px)').matches ? 'grid' : 'list';
 let query = '';
 const open = new Set(ITEMS.filter((i) => i.open).map((i) => i.id));
 const checked = new Set(ITEMS.filter((i) => i.checked).map((i) => i.id));

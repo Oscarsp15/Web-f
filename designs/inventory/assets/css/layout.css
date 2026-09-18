@@ -1,0 +1,164 @@
+/* ==========================================================================
+   layout.css — the lavender stage, the app card, and the two-column split
+   ========================================================================== */
+
+.stage {
+  min-height: 100%;
+  padding: clamp(16px, 3vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* The dotted fields in the reference's corners. Decorative, so they are drawn
+   here rather than added to the markup. */
+.stage::before,
+.stage::after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  background-image: radial-gradient(#d8d2f2 1.4px, transparent 1.5px);
+  background-size: 15px 15px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.stage::before {
+  right: 12px;
+  top: 28%;
+}
+.stage::after {
+  left: 12px;
+  bottom: 4%;
+}
+
+.stage__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+.stage__head h1 {
+  font-size: clamp(19px, 2.2vw, 25px);
+  letter-spacing: -0.3px;
+}
+.stage__tools {
+  margin-left: auto;
+  display: flex;
+  gap: var(--sp-3);
+}
+
+/* --- the app card --------------------------------------------------------- */
+
+.app {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 62px 300px minmax(0, 1fr);
+  background: var(--surface);
+  border-radius: var(--r-xl);
+  box-shadow: 0 24px 60px rgba(83, 66, 140, 0.1);
+  overflow: hidden;
+}
+/* The warm bloom behind the left column, sampled pink in the reference. */
+.app::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 420px;
+  background: radial-gradient(90% 70% at 18% 22%, var(--wash-pink), transparent 70%),
+    radial-gradient(80% 60% at 6% 62%, var(--wash-lav), transparent 72%);
+  pointer-events: none;
+}
+
+.rail {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  padding-block: var(--sp-5);
+}
+.rail__foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.side {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-4) var(--sp-5) 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-5) var(--sp-5) 0;
+  overflow: hidden;
+}
+.main__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding-bottom: var(--sp-4);
+}
+.main__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* --- breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+  .app {
+    grid-template-columns: 62px minmax(0, 1fr);
+  }
+  .side {
+    display: none;
+  }
+  .app.is-side-open .side {
+    display: flex;
+    position: absolute;
+    z-index: 4;
+    inset: 0 auto 0 62px;
+    width: min(320px, 78vw);
+    background: var(--surface);
+    padding-inline: var(--sp-4);
+    box-shadow: 18px 0 40px rgba(83, 66, 140, 0.12);
+  }
+}
+
+@media (max-width: 720px) {
+  .stage {
+    padding: 12px;
+  }
+  .app {
+    grid-template-columns: 54px minmax(0, 1fr);
+    border-radius: var(--r-lg);
+  }
+  .main {
+    padding-inline: var(--sp-3);
+  }
+  .stage::before,
+  .stage::after {
+    display: none;
+  }
+}

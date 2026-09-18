@@ -23,9 +23,9 @@ export const UI = {
       'rebuild sits the skill that documents how it was made: how the palette was ' +
       'measured, how the typeface was identified, and which mistakes cost a round.',
     stats: [
-      ['3', 'designs'],
-      ['4', 'screens'],
-      ['14', 'skill documents'],
+      ['4', 'designs'],
+      ['5', 'screens'],
+      ['17', 'skill documents'],
       ['0', 'dependencies'],
     ],
     openDesign: 'Open the design',
@@ -52,9 +52,9 @@ export const UI = {
       'Junto a cada reconstrucción está la skill que documenta cómo se hizo: cómo se ' +
       'midió la paleta, cómo se identificó la tipografía y qué errores costaron una ronda.',
     stats: [
-      ['3', 'diseños'],
-      ['4', 'pantallas'],
-      ['14', 'documentos de skill'],
+      ['4', 'diseños'],
+      ['5', 'pantallas'],
+      ['17', 'documentos de skill'],
       ['0', 'dependencias'],
     ],
     openDesign: 'Abrir el diseño',
@@ -212,6 +212,49 @@ export const DESIGNS = [
         { path: 'SKILL.md', label: 'SKILL.md' },
         { path: 'references/motif-and-palette.md', label: { en: 'Motif & palette', es: 'Motivo y paleta' } },
         { path: 'references/type.md', label: { en: 'Type', es: 'Tipografía' } },
+      ],
+    },
+  },
+  {
+    id: 'inventory',
+    name: 'Inventory',
+    theme: 'pastel',
+    kind: { en: 'Stock management dashboard', es: 'Panel de gestión de stock' },
+    themeLabel: { en: 'Pastel', es: 'Pastel' },
+    blurb: {
+      en:
+        'A table product rather than a chart dashboard: a searchable stock list whose ' +
+        'rows open in place, beside monthly figures and two trend charts.',
+      es:
+        'Un producto de tabla, no un dashboard de gráficos: una lista de stock con ' +
+        'búsqueda real cuyas filas se abren en sitio, junto a cifras y dos tendencias.',
+    },
+    built: {
+      en: [
+        'Poppins won the per-glyph ranking at .826 mean IoU, first on four of six',
+        'Search filters for real — the screen is literally titled "Search for items"',
+        'Rows expand in place; the outline is split across two table rows',
+      ],
+      es: [
+        'Poppins ganó el ranking por glifo con .826 de IoU, primera en cuatro de seis',
+        'La búsqueda filtra de verdad — la pantalla se titula "Search for items"',
+        'Las filas se abren en sitio; el contorno se reparte entre dos filas',
+      ],
+    },
+    screens: [
+      {
+        label: { en: 'Stock table', es: 'Tabla de stock' },
+        href: './designs/inventory/',
+        preview: './assets/previews/inventory.png',
+      },
+    ],
+    skill: {
+      id: 'inventory-dashboard',
+      base: './.claude/skills/inventory-dashboard/',
+      files: [
+        { path: 'SKILL.md', label: 'SKILL.md' },
+        { path: 'references/table-and-detail.md', label: { en: 'Table & detail', es: 'Tabla y detalle' } },
+        { path: 'references/stage-and-palette.md', label: { en: 'Stage & palette', es: 'Escenario y paleta' } },
       ],
     },
   },

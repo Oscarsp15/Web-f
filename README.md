@@ -13,8 +13,9 @@ how it was made**.
 | **Stakent** — crypto staking dashboard | Dashboard | Dark product UI | `.claude/skills/stakent-dashboard/` |
 | **Sequence** — business banking | Dashboard, Transfer | Light product UI | `.claude/skills/sequence-fintech/` |
 | **Camellia** — course workbook | Template sheet | Editorial / print | `.claude/skills/editorial-workbook/` |
+| **Inventory** — stock management | Stock table | Pastel admin UI | `.claude/skills/inventory-dashboard/` |
 
-The gallery at the root lists all three, links to each screen, and renders the skill
+The gallery at the root lists all four, links to each screen, and renders the skill
 documents in place. It fetches the same `.md` files Claude Code loads, in the
 language the page is set to: Spanish translations live under `<skill>/es/` and the
 English original is both the fallback and the source of truth.
@@ -28,6 +29,7 @@ assets/previews/                # real screenshots of each design
 designs/stakent/                # dark staking dashboard
 designs/sequence/               # light fintech dashboard + transfer flow
 designs/workbook/               # editorial course-workbook template
+designs/inventory/              # pastel stock-management dashboard
 .claude/skills/<name>/SKILL.md  # the recipe, with references/ and es/ alongside
 ```
 

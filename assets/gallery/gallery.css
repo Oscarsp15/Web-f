@@ -334,6 +334,10 @@ ul {
   background: #a45c45;
   border-color: #a45c45;
 }
+.entry__theme--pastel::before {
+  background: #b492ff;
+  border-color: #b492ff;
+}
 
 .entry h2 {
   margin-top: 8px;

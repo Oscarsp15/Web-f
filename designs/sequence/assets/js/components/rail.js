@@ -39,7 +39,7 @@ export function initRail(root) {
   if (chip) {
     chip.innerHTML =
       `<span class="user-chip__avatar">${ACCOUNT.user.initials}</span>` +
-      `<span class="grow"><b>${ACCOUNT.user.name}</b>` +
+      `<span class="user-chip__text"><b>${ACCOUNT.user.name}</b>` +
       `<span>${ACCOUNT.user.email}</span></span>` +
       '<span data-icon="chevronDown" data-icon-size="16"></span>';
   }

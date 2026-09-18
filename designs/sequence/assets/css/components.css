@@ -292,15 +292,25 @@
   font-weight: 700;
   font-size: 12px;
 }
-.user-chip b {
+/* Scoped to the text column on purpose. A bare `.user-chip span` also matches
+   the avatar and the chevron, and it out-specifies `.user-chip__avatar`
+   (0,1,1 vs 0,1,0) — which is how the initials ended up outside their circle. */
+.user-chip__text {
+  flex: 1;
+  min-width: 0;
+}
+.user-chip__text b {
   display: block;
   font-size: 13.5px;
   font-weight: 500;
 }
-.user-chip span {
+.user-chip__text span {
   display: block;
   font-size: 11.5px;
   color: var(--ink-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .rail__copyright {
   text-align: center;

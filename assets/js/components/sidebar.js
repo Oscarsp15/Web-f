@@ -5,6 +5,7 @@
 
 import { NAV, ACTIVE_ASSETS } from '../data.js';
 import { hydrateIcons } from '../icons.js';
+import { coinLogo } from '../coin-logos.js';
 
 const SUB_ID = 'active-staking-list';
 
@@ -38,7 +39,7 @@ function subListMarkup() {
     (asset) =>
       `<button type="button" class="nav-sub__row${asset.muted ? ' is-muted' : ''}">` +
       `<span class="coin-mark coin-mark--sm" style="background:${asset.color}">` +
-      `${asset.symbol.slice(0, 2)}</span><span><span class="nav-sub__label">` +
+      `${coinLogo(asset.symbol, 16)}</span><span><span class="nav-sub__label">` +
       `${asset.name}</span><span class="nav-sub__value">Amount ${asset.amount}</span></span>` +
       '</button>'
   ).join('');

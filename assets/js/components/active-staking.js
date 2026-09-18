@@ -5,6 +5,7 @@
 
 import { STAKE, TABS } from '../data.js';
 import { hydrateIcons } from '../icons.js';
+import { coinLogo } from '../coin-logos.js';
 
 function stakeSummaryMarkup() {
   return (
@@ -12,7 +13,7 @@ function stakeSummaryMarkup() {
     '<div class="stake__title">' +
     `<h2>${STAKE.asset}</h2>` +
     `<span class="coin-mark" style="background:${STAKE.color}">` +
-    `${STAKE.symbol.slice(0, 2)}</span>` +
+    `${coinLogo(STAKE.symbol)}</span>` +
     '<button type="button" class="icon-btn icon-btn--sm" aria-label="Copy stake address">' +
     '<span data-icon="link" data-icon-size="16"></span></button>' +
     '<button type="button" class="icon-btn icon-btn--sm" aria-label="Share stake">' +

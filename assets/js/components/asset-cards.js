@@ -4,6 +4,7 @@
 
 import { ASSETS } from '../data.js';
 import { hydrateIcons } from '../icons.js';
+import { coinLogo } from '../coin-logos.js';
 import { renderSparkline } from '../sparkline.js';
 
 function cardMarkup(asset) {
@@ -12,7 +13,8 @@ function cardMarkup(asset) {
   return (
     `<article class="asset-card" data-asset="${asset.id}">` +
     '<header class="asset-card__head">' +
-    `<span class="coin-mark" style="background:${asset.color}">${asset.symbol.slice(0, 2)}</span>` +
+    `<span class="coin-mark" style="background:${asset.color}">` +
+    `${coinLogo(asset.symbol)}</span>` +
     '<div>' +
     `<span class="asset-card__kind">${asset.kind}</span>` +
     `<h3 class="asset-card__name">${asset.name}</h3>` +

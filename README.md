@@ -50,6 +50,24 @@ cada push a `main`. Requiere *Settings → Pages → Source: GitHub Actions*. Si
 fuente está configurada como *Deploy from a branch* (`main`, carpeta `/`), el sitio
 se sirve igual: `index.html` está en la raíz y `.nojekyll` evita el paso por Jekyll.
 
+## Tipografía y color
+
+Ambos se eligieron midiendo el mockup de referencia, no a ojo:
+
+- **Color**: los tokens de `assets/css/tokens.css` salen de muestrear los píxeles
+  de la imagen (bloques de 9x9 promediados en zonas planas; para el texto, el píxel
+  más luminoso de cada trazo). De ahí el negro con matiz violeta — `#060610` en el
+  sidebar, `#090913` en el área principal, `#0b0b15` en tarjetas — y el blanco puro
+  del texto principal.
+- **Tipografía**: **General Sans** (Indian Type Foundry, vía el CDN de Fontshare).
+  Se eligió comparando siete candidatas libres contra glifos recortados del mockup
+  y midiendo el solape de píxeles (IoU) glifo a glifo. General Sans ganó de media
+  (.752), por delante de Satoshi (.711), DM Sans (.671) y Switzer (.656).
+  La fuente **no se auto-aloja**: no pude verificar desde el entorno de desarrollo
+  si la ITF Free Font License permite redistribuir el binario, así que se carga
+  desde el canal oficial del fundidor. Si se confirma que la licencia lo permite,
+  auto-alojar el `.woff2` quitaría esa dependencia de terceros.
+
 ## Créditos
 
 El diseño visual de partida es un shot publicado en Dribbble

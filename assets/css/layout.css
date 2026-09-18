@@ -2,10 +2,14 @@
    layout.css — app shell, sidebar, topbar, content grids and breakpoints
    ========================================================================== */
 
+/* The shell owns the viewport: the sidebar spans its full height and the
+   content pane scrolls inside, so the two columns always end together. */
 .app {
   display: grid;
   grid-template-columns: 266px minmax(0, 1fr);
-  min-height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   background: var(--shell);
 }
 
@@ -18,10 +22,7 @@
   padding: var(--sp-5) var(--sp-4) var(--sp-4);
   background: var(--panel);
   border-right: 1px solid var(--line);
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100dvh;
+  height: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
 }
@@ -41,8 +42,11 @@
 
 .main {
   min-width: 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .topbar {
